@@ -13,7 +13,7 @@ class CubitCounter extends Cubit<CounterState> {
   }
 
   void autoIncrement() {
-    Timer.periodic(const Duration(seconds: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 5), (timer) {
       increment();
     });
   }

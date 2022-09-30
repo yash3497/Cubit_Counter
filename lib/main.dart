@@ -1,5 +1,7 @@
 import 'package:cubit_counter_app/home/cubit/counter_cubit.dart';
 import 'package:cubit_counter_app/home/screens/homescreen.dart';
+import 'package:cubit_counter_app/settings/cubit/setting_cubit.dart';
+import 'package:cubit_counter_app/settings/cubit/setting_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,14 +15,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CubitCounter(),
-      child: MaterialApp(
-        title: 'Cubit Counter',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => CubitCounter(),
         ),
-        home: const HomeScreen(),
+        BlocProvider(
+          create: (context) => SettingCubit(),
+        ),
+      ],
+      child: BlocBuilder<SettingCubit, SettingState>(
+        builder: (context, state) {
+          return MaterialApp(
+            title: 'Cubit Counter',
+            theme: state.themeData,
+            home: const HomeScreen(),
+          );
+        },
       ),
     );
   }

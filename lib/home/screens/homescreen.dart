@@ -1,5 +1,6 @@
 import 'package:cubit_counter_app/home/cubit/counter_cubit.dart';
 import 'package:cubit_counter_app/home/cubit/counter_state.dart';
+import 'package:cubit_counter_app/settings/screens/setting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,6 +25,15 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cubit Counter'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => SettingScreen()));
+            },
+          ),
+        ],
       ),
       body: BlocBuilder<CubitCounter, CounterState>(
         builder: (context, state) {
